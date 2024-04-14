@@ -1,0 +1,21 @@
+name: CI Workflow and test
+on:
+  pull_request:
+    types:
+      - opened
+      - edited
+      - reopened
+      - synchronize
+jobs:
+  run_tests:
+    runs-on: ubuntu-latest
+    # Docker Hub image that ⁠ run_tests ⁠ executes in
+    # container: node:10.18-jessie
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+      - run: python -m pip install pip==23.0.1
+      - run: pip install -r requirements.txt
+      - name: Run Test Suit
+        run: pytest
