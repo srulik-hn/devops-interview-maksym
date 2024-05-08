@@ -4,10 +4,10 @@ name: CI Pipeline
 on:
     push:
       branches:
-        - master
+        - main
     pull_request:
       branches:
-        - master
+        - main
 
 env:
   ECR_REGISTRY: 347274206741.dkr.ecr.us-east-1.amazonaws.com
