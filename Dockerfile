@@ -7,11 +7,10 @@ RUN apt-get update -y && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
-RUN pip install pip --upgrade
-
 COPY . .
 
-RUN pip install -r requirements.txt
+RUN pip install pip --upgrade && \
+    pip install --no-cache-dir -r requirements.txt
 
 ENTRYPOINT [ "python", "-m", "awslambdaric" ]
 CMD [ "app.main" ]
