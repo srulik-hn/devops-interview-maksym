@@ -1,16 +1,18 @@
 FROM python:3.8-slim
 
-RUN apt-get update -y && apt-get install  -y  \
+COPY lib.py requirements.txt ./
+
+RUN apt-get update -y && \
+    apt-get install  -y --no-install-recommends  \
     gcc \
-    libpq-dev
+    libpq-dev && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
 
-RUN pip install pip --upgrade
+RUN pip install pip --upgrade && \
+    pip install --no-cache-dir -r requirements.txt
 
-COPY . .
-
-RUN pip install -r requirements.txt
-
-RUN pip install awslambdaric
+COPY app.py .
 
 ENTRYPOINT [ "python", "-m", "awslambdaric" ]
-CMD [ "app.handler" ]
+CMD [ "app.main" ]
