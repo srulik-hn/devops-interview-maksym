@@ -1,6 +1,6 @@
 FROM python:3.8-slim
 
-COPY {lib.py,requirements.txt} .
+COPY lib.py requirements.txt ./
 
 RUN apt-get update -y && \
     apt-get install  -y --no-install-recommends  \
