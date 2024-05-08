@@ -1,2 +1,3 @@
 pyyaml
 awslambdaric
+pytest
